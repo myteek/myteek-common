@@ -52,9 +52,7 @@ public final class Response<T> implements Serializable {
     }
 
     private Response(Builder<T> builder) {
-        this.code = builder.code;
-        this.message = builder.message;
-        this.data = builder.data;
+        this(builder.code, builder.message, builder.data);
     }
 
     public static class Builder<T> {
@@ -65,8 +63,21 @@ public final class Response<T> implements Serializable {
 
         private T data;
 
-        public static Builder newBuilder() {
-            return new Builder();
+        public Builder(int code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        /**
+         * init builder
+         * @param code code
+         * @param message message
+         * @param data data
+         */
+        public Builder(int code, String message, T data) {
+            this.code = code;
+            this.message = message;
+            this.data = data;
         }
 
         public Builder code(int code) {
